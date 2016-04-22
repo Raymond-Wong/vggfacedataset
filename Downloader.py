@@ -162,6 +162,8 @@ if __name__ == "__main__":
     FILE_DIR = params['i']
   if 'o' in params.keys():
     IMG_DIR = params['o']
+  if 'tm' in params.keys():
+    THREAD_AMOUNT = int(tm)
   if not os.path.exists(FILE_DIR):
     logger('ERROR', u'输入路径不存在！')
     exit(-1)
@@ -173,6 +175,7 @@ if __name__ == "__main__":
     os.makedirs(IMG_DIR)
   logger('INFO', u'输入目录的路径为 %s' % FILE_DIR)
   logger('INFO', u'输出目录的路径为 %s' % IMG_DIR)
+  logger('INFO', u'共开启 %d 个线程进行下载' % THREAD_AMOUNT)
   logger('INFO', u'获取输入目录下的所有文件，并在输出目录中创建相应储存结果的目录...')
   fileList = []
   for root, dirs, files in os.walk(FILE_DIR):
