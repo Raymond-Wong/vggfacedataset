@@ -1,7 +1,10 @@
 # ignore input file
-in/
+*in/
 # ignore output file
-out/
+*out/
+# ignore log
+failed.log
+log.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
