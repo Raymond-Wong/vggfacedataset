@@ -50,7 +50,7 @@ class BatchDownloader(threading.Thread):
     try:
       urllib.urlretrieve(url, path, process)
       return True, None
-    except Exception as e:
+    except Exception, e:
       return False, e
 
   # 以此读取负责的文件中的每一行，并下载该行对应的图片
