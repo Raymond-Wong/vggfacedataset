@@ -50,8 +50,8 @@ class BatchDownloader(threading.Thread):
     try:
       urllib.urlretrieve(url, path, process)
       return True, None
-    except Exception as e:
-      return False, e
+    except Exception:
+      return False, Exception
 
   # 以此读取负责的文件中的每一行，并下载该行对应的图片
   # 如果下载失败，则将失败的url写进日志文件中
@@ -163,7 +163,7 @@ if __name__ == "__main__":
   if 'o' in params.keys():
     IMG_DIR = params['o']
   if 'tm' in params.keys():
-    THREAD_AMOUNT = int(tm)
+    THREAD_AMOUNT = int(params['tm'])
   if not os.path.exists(FILE_DIR):
     logger('ERROR', u'输入路径不存在！')
     exit(-1)
