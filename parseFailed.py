@@ -17,7 +17,7 @@ if __name__ == '__main__':
   resPath = sys.argv[3]
   fileNames = []
   for root, dirs, files in os.walk(inPath):
-    for fn in files:
+    for count, fn in enumerate(files):
       f = open(os.path.join(inPath, fn), 'r')
       imgsName = getImgsName(os.path.join(outPath, fn.replace('.txt', '')))
       line = f.readline()
@@ -32,5 +32,6 @@ if __name__ == '__main__':
       for line in toWriteLines:
         f.write(line)
       f.close()
+      print '%d\t%s\t有%d张图片未下载' % (count, fn, len(toWriteLines))
 
 
