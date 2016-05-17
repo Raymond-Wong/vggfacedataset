@@ -34,6 +34,6 @@ if __name__ == '__main__':
       for line in toWriteLines:
         f.write(line)
       f.close()
-      print u'%d\t\t%s\t\t有%d张图片未下载，占总数的%.2f%%' % (count, fn, len(toWriteLines), (len(toWriteLines) * 100 / lineAmount))
+      print '%d\t\t%s\t\t%d pics havenot downloaded，%.2f%% of total amount' % (count, fn, len(toWriteLines), (len(toWriteLines) * 100.0 / lineAmount))
 
 
