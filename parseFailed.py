@@ -22,7 +22,9 @@ if __name__ == '__main__':
       imgsName = getImgsName(os.path.join(outPath, fn.replace('.txt', '')))
       line = f.readline()
       toWriteLines = []
+      lineAmount = 0
       while line:
+        lineAmount += 1
         pid = line.split()[1] + '.jpg'
         if pid not in imgsName:
           toWriteLines.append(line)
@@ -32,6 +34,6 @@ if __name__ == '__main__':
       for line in toWriteLines:
         f.write(line)
       f.close()
-      print '%d\t%s\t有%d张图片未下载' % (count, fn, len(toWriteLines))
+      print u'%d\t\t%s\t\t有%d张图片未下载，占总数的%.2f%%' % (count, fn, len(toWriteLines), (len(toWriteLines) * 100 / lineAmount))
 
 
