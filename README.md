@@ -6,7 +6,7 @@ win10/ubuntu14.04 + python2.7
 
 # Usage
 ```
-	$ python Downloader.py -i /path/to/input -o /path/to/output -t threads_amount
+$ python Downloader.py -i /path/to/input -o /path/to/output -t threads_amount
 ```
 
 # Args
@@ -20,9 +20,11 @@ win10/ubuntu14.04 + python2.7
 1. 准备输入目录，项目文件中有一个in目录作为参考。该目录下有四个txt文件，分别为四个人的图片信息
 
 ![](http://i.imgur.com/2V8wDNF.png)
+
 2. 准备输出目录，项目文件中有一个空的out目录作为参考
 
 ![](http://i.imgur.com/8EYFVHw.png)
+
 3. 执行`$ python Downloader.py -i ./in -o ./out -t 4`
 
 ![](http://i.imgur.com/m9N9usz.png)
