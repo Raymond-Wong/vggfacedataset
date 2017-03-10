@@ -1,5 +1,3 @@
-# ignore input file
-*in/
 # ignore output file
 *out/
 # ignore log
