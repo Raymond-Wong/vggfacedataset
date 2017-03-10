@@ -17,19 +17,19 @@ $ python Downloader.py -i /path/to/input -o /path/to/output -t threads_amount
 `-t`:可选，默认为单线程。线程数大于0且不大于16
 
 # Examples
-1. 准备输入目录，项目文件中有一个in目录作为参考。该目录下有四个txt文件，分别为四个人的图片信息
+1.准备输入目录，项目文件中有一个in目录作为参考。该目录下有四个txt文件，分别为四个人的图片信息
 
 ![](http://i.imgur.com/2V8wDNF.png)
 
-2. 准备输出目录，项目文件中有一个空的out目录作为参考
+2.准备输出目录，项目文件中有一个空的out目录作为参考
 
 ![](http://i.imgur.com/8EYFVHw.png)
 
-3. 执行`$ python Downloader.py -i ./in -o ./out -t 4`
+3.执行`$ python Downloader.py -i ./in -o ./out -t 4`
 
 ![](http://i.imgur.com/m9N9usz.png)
 
-4. 查看输出
+4.查看输出
 
 ![](http://i.imgur.com/9GJXry4.png)
 ![](http://i.imgur.com/0IUxUo9.png)
