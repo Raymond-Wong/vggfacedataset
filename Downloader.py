@@ -11,6 +11,8 @@ import urllib
 import threading
 import time
 
+from optparse import OptionParser
+
 # 设置5秒超时
 import socket
 socket.setdefaulttimeout(5.0)
@@ -49,6 +51,7 @@ class BatchDownloader(threading.Thread):
   def download(self, path, url):
     try:
       urllib.urlretrieve(url, path, process)
+      time.sleep(0.5)
       return True, None
     except Exception, e:
       return False, e
@@ -157,13 +160,17 @@ def getParams(args):
 
 if __name__ == "__main__":
   # 从输入参数中获取输入文件的路径以及输出文件的路径
-  params = getParams(sys.argv[1:])
-  if 'i' in params.keys():
-    FILE_DIR = params['i']
-  if 'o' in params.keys():
-    IMG_DIR = params['o']
-  if 'tm' in params.keys():
-    THREAD_AMOUNT = int(params['tm'])
+  parser = OptionParser()
+  parser.add_option('-i', '--input', action="store", dest='input', help=u"输入文件夹路径，文件夹中为多个以人名命名的txt文件")
+  parser.add_option('-o', '--output', action='store', dest="output", help="输出文件夹路径")
+  parser.add_option('-t', '--threads', action="store", dest='threads_amount', help=u"使用多少个线程下载，线程数大于0小于等于16", default="1")
+  (options, args) = parser.parse_args()
+  if options.input is None or options.output is None or not options.threads_amount.isdigit() or int(options.threads_amount) < 1 or int(options.threads_amount) > 16:
+    parser.print_help()
+    exit(1)
+  FILE_DIR = options.input
+  IMG_DIR = options.output
+  THREAD_AMOUNT = int(options.threads_amount)
   if not os.path.exists(FILE_DIR):
     logger('ERROR', u'输入路径不存在！')
     exit(-1)
