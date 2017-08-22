@@ -68,10 +68,10 @@ class BatchDownloader(threading.Thread):
         lineNum += 1
         # logger('DEBUG', '%s readling the %dth line' % (self.name, lineNum))
         arr = line.split()
-        outPath = os.path.join(os.path.join(IMG_DIR, fn), arr[1] + ".jpg")
+        outPath = os.path.join(os.path.join(IMG_DIR, fn), arr[0] + ".jpg")
         res = [True]
         if not os.path.exists(outPath):
-          url = arr[2]
+          url = arr[1]
           res = self.download(outPath, url)
         # 如果下载成功，则SUCCESS_COUNT自增1
         if LOCK.acquire():
@@ -80,7 +80,7 @@ class BatchDownloader(threading.Thread):
         if not res[0]:
           if FILE_LOCK.acquire():
             f = open(LOG_DIR, 'a')
-            f.write('%s\t%s\t%s\t%s\n' % (fn, arr[1], url, res[1]))
+            f.write('%s\t%s\t%s\t%s\n' % (fn, arr[0], url, res[1]))
             f.close()
             FILE_LOCK.release()
         line = _file.readline()
@@ -163,14 +163,14 @@ if __name__ == "__main__":
   parser = OptionParser()
   parser.add_option('-i', '--input', action="store", dest='input', help=u"输入文件夹路径，文件夹中为多个以人名命名的txt文件")
   parser.add_option('-o', '--output', action='store', dest="output", help="输出文件夹路径")
-  parser.add_option('-t', '--threads', action="store", dest='threads_amount', help=u"使用多少个线程下载，线程数大于0小于等于16", default="1")
+  parser.add_option('-t', '--threads', action="store", dest='threads', help=u"使用多少个线程下载，线程数大于0小于等于16", default="1")
   (options, args) = parser.parse_args()
-  if options.input is None or options.output is None or not options.threads_amount.isdigit() or int(options.threads_amount) < 1 or int(options.threads_amount) > 16:
+  if options.input is None or options.output is None or not options.threads.isdigit() or int(options.threads) < 1:
     parser.print_help()
     exit(1)
   FILE_DIR = options.input
   IMG_DIR = options.output
-  THREAD_AMOUNT = int(options.threads_amount)
+  THREAD_AMOUNT = int(options.threads)
   if not os.path.exists(FILE_DIR):
     logger('ERROR', u'输入路径不存在！')
     exit(-1)
